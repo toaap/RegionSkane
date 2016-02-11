@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RegionSkane.Controller;
+using RegionSkane.Entity_Framework;
 
 namespace RegionSkane
 {
@@ -20,6 +21,21 @@ namespace RegionSkane
         }
 
         private RegionController controller = new RegionController();
+        private AddHandledareView nd = new AddHandledareView();
+
+        public string LabelText
+        {
+            get { return textBox1.Text; }
+            set { textBox1.Text = value; }
+        }
+
+        public void Geiv()
+        {
+            //textBox1.Text = Handläggares;
+            nd.Close();
+            this.Enabled = true;
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -96,6 +112,30 @@ namespace RegionSkane
             
             
             controller.Crud(dt);
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Handläggare h = new Handläggare();
+            h.HandläggarId = textBox3.Text;
+            h.HandläggarNamn = "Janne";
+            h.HandläggarTelefonNr = "070";
+
+            DataTable dt = new DataTable();
+
+            AddHandledareView newView = new AddHandledareView(this);
+            newView.Show();
+
+
+            try
+            {
+                DataSet ds = (DataSet)dataGridView1.DataSource;
+                controller.AmountOfSuppliers(ds);
+            }
+            catch
+            {
+                textBox3.Text = "något blev fel";
+            }
         }
 
 

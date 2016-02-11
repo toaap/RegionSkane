@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\MigraDoc-1.32-patched-release\MigraDoc.DocumentObjectModel.dll</HintPath>
@@ -51,7 +57,10 @@
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +71,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddHandledareView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddHandledareView.Designer.cs">
+      <DependentUpon>AddHandledareView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\RegionController.cs" />
+    <Compile Include="DataAccessLayer\DataAccess.cs" />
+    <Compile Include="Entity Framework\Artikel.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\Artikelgrupp.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\Avtal.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\EF RegionDb.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Entity Framework\EF RegionDb.Designer.cs">
+      <DependentUpon>EF RegionDb.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Entity Framework\EntityDataModelRegionSkane.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModelRegionSkane.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\EntityDataModelRegionSkane.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModelRegionSkane.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\EntityDataModelRegionSkane.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModelRegionSkane.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity Framework\Handläggare.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\Huvudgrupp.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\Leverantör.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entity Framework\Varugrupp.cs">
+      <DependentUpon>EF RegionDb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RegionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +140,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddHandledareView.resx">
+      <DependentUpon>AddHandledareView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegionView.resx">
       <DependentUpon>RegionView.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,6 +155,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="Entity Framework\EF RegionDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EF RegionDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Entity Framework\EntityDataModelRegionSkane.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityDataModelRegionSkane.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entity Framework\EF RegionDb.tt">
+      <DependentUpon>EF RegionDb.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EF RegionDb.cs</LastGenOutput>
+    </None>
+    <None Include="Entity Framework\EntityDataModelRegionSkane.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityDataModelRegionSkane.edmx</DependentUpon>
+      <LastGenOutput>EntityDataModelRegionSkane.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Entity Framework\EntityDataModelRegionSkane.edmx.diagram">
+      <DependentUpon>EntityDataModelRegionSkane.edmx</DependentUpon>
+    </None>
+    <None Include="Entity Framework\EntityDataModelRegionSkane.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityDataModelRegionSkane.edmx</DependentUpon>
+      <LastGenOutput>EntityDataModelRegionSkane.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -126,6 +224,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -167,15 +167,22 @@ namespace RegionSkane.Utils
                 string newSheetName = "table";
                 int sheetNumber = 0;
 
+                string selectTags = "[01Artikelnr RS],[06Benämning 1],[07Benämning 2],[08ProdNamn]," +
+                                 "[09LevArtNr],[10LevNr],[12MBE Lev],[13MBE Kund],[14TrspFp],[15PallFp],[16Enhet]," +
+                                 "[17PrisPerEnhet],[18Momssats],[19Regions kod],[22Artikelgrupp],[23Lagertyp]," +
+                                 "[24Ledtid Lev],[25BerFörbr],[26ÄndrBeskr],[27Reg# art#konto],[28Ändringshändelse]," +
+                                 "[29Avtalsnr],[30Lagerställe/Krav],[31Mrp-kod],[Pos# Nr],[Tillv# Land],[Valuta]," +
+                                 "[Avd, Fp],[Anmärkningar],[Produktleverantör]";
+                
                 // Loop through all Sheets to get data
                 foreach (DataRow dr in dtSheet.Rows)
                 {
-                        string sheetName = dr["TABLE_NAME"].ToString();
+                    string sheetName = dr["TABLE_NAME"].ToString();
                         string excelSql = "";
 
                         if (sheetName.Equals("Original$"))
                         {
-                            excelSql = "SELECT * FROM [" + sheetName + "] WHERE [29Avtalsnr] LIKE '" + avtalsNr + "'";
+                            excelSql = "SELECT " + selectTags + " FROM [" + sheetName + "] WHERE [29Avtalsnr] LIKE '" + avtalsNr + "'";
                         }
 
                         if (avtalsNr == null || avtalsNr == String.Empty || excelSql.Equals(""))
@@ -239,6 +246,22 @@ namespace RegionSkane.Utils
                 }
             }
             return returnDt;
+        }
+
+        public List<string> UniqueSupplierInDataSet(DataSet ds){
+            DataTable dt = ds.Tables["table1"];
+            List<string> list = new List<string>();
+            List<string> returnList = new List<string>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string supplier = row["10LevNr"].ToString();
+                list.Add(supplier);
+            }
+
+            returnList = list.Distinct().ToList();
+            return returnList;
+
         }
 
 

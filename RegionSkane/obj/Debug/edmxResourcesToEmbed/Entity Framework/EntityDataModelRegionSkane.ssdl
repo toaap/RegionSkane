@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RegionServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Artikel">
+    <Key>
+      <PropertyRef Name="01Artikelnr RS" />
+    </Key>
+    <Property Name="01Artikelnr RS" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="06Benämning 1" Type="varchar" MaxLength="255" />
+    <Property Name="07Benämning 2" Type="varchar" MaxLength="255" />
+    <Property Name="08ProdNamn" Type="varchar" MaxLength="255" />
+    <Property Name="09LevArtNr" Type="varchar" MaxLength="255" />
+    <Property Name="10LevNr" Type="varchar" MaxLength="255" />
+    <Property Name="12MBE Lev" Type="varchar" MaxLength="255" />
+    <Property Name="13MBE Kund" Type="varchar" MaxLength="255" />
+    <Property Name="14TrspFp" Type="varchar" MaxLength="255" />
+    <Property Name="15PallFp" Type="varchar" MaxLength="255" />
+    <Property Name="16Enhet" Type="varchar" MaxLength="255" />
+    <Property Name="17PrisPerEnhet" Type="varchar" MaxLength="255" />
+    <Property Name="18Momssats" Type="varchar" MaxLength="255" />
+    <Property Name="19Regions kod" Type="varchar" MaxLength="255" />
+    <Property Name="22Artikelgrupp" Type="varchar" MaxLength="255" />
+    <Property Name="23Lagertyp" Type="varchar" MaxLength="255" />
+    <Property Name="24Ledtid Lev" Type="varchar" MaxLength="255" />
+    <Property Name="25BerFörbr" Type="varchar" MaxLength="255" />
+    <Property Name="26ÄndrBeskr" Type="varchar" MaxLength="255" />
+    <Property Name="27Reg# art.konto" Type="varchar" MaxLength="255" />
+    <Property Name="28Ändringshändelse" Type="varchar" MaxLength="255" />
+    <Property Name="29Avtalsnr" Type="varchar" MaxLength="255" />
+    <Property Name="30Lagerställe/Krav" Type="varchar" MaxLength="255" />
+    <Property Name="31Mrp-kod" Type="varchar" MaxLength="255" />
+    <Property Name="Pos# Nr" Type="varchar" MaxLength="255" />
+    <Property Name="Tillv# Land" Type="varchar" MaxLength="255" />
+    <Property Name="Valuta" Type="varchar" MaxLength="255" />
+    <Property Name="Avd, Fp" Type="varchar" MaxLength="255" />
+    <Property Name="Anmärkningar" Type="varchar" MaxLength="255" />
+    <Property Name="Produktleverantör" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Artikelgrupp">
+    <Key>
+      <PropertyRef Name="22Artikelgrupp" />
+    </Key>
+    <Property Name="22Artikelgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ArtikelgruppsNamn" Type="varchar" MaxLength="255" />
+    <Property Name="21Varugrupp" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Avtal">
+    <Key>
+      <PropertyRef Name="29Avtalsnr" />
+    </Key>
+    <Property Name="29Avtalsnr" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="01Artikelnr RS" Type="varchar" MaxLength="255" />
+    <Property Name="HandläggarId" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Handläggare">
+    <Key>
+      <PropertyRef Name="HandläggarId" />
+    </Key>
+    <Property Name="HandläggarId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="HandläggarNamn" Type="varchar" MaxLength="255" />
+    <Property Name="HandläggarTelefonNr" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Huvudgrupp">
+    <Key>
+      <PropertyRef Name="20Huvudgrupp" />
+    </Key>
+    <Property Name="20Huvudgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="HuvudgruppsNamn" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Leverantör">
+    <Key>
+      <PropertyRef Name="Levnr" />
+    </Key>
+    <Property Name="Levnr" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Varugrupp">
+    <Key>
+      <PropertyRef Name="21Varugrupp" />
+    </Key>
+    <Property Name="21Varugrupp" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="VarugruppsNamn" Type="varchar" MaxLength="255" />
+    <Property Name="20Huvudgrupp" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Artikel__10LevNr__1BFD2C07">
+    <End Role="Leverantör" Type="Self.Leverantör" Multiplicity="0..1" />
+    <End Role="Artikel" Type="Self.Artikel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Leverantör">
+        <PropertyRef Name="Levnr" />
+      </Principal>
+      <Dependent Role="Artikel">
+        <PropertyRef Name="10LevNr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Artikel__22Artik__1CF15040">
+    <End Role="Artikelgrupp" Type="Self.Artikelgrupp" Multiplicity="0..1" />
+    <End Role="Artikel" Type="Self.Artikel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikelgrupp">
+        <PropertyRef Name="22Artikelgrupp" />
+      </Principal>
+      <Dependent Role="Artikel">
+        <PropertyRef Name="22Artikelgrupp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Artikelgr__21Var__173876EA">
+    <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="0..1" />
+    <End Role="Artikelgrupp" Type="Self.Artikelgrupp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Varugrupp">
+        <PropertyRef Name="21Varugrupp" />
+      </Principal>
+      <Dependent Role="Artikelgrupp">
+        <PropertyRef Name="21Varugrupp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Avtal__01Artikel__1FCDBCEB">
+    <End Role="Artikel" Type="Self.Artikel" Multiplicity="0..1" />
+    <End Role="Avtal" Type="Self.Avtal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikel">
+        <PropertyRef Name="01Artikelnr RS" />
+      </Principal>
+      <Dependent Role="Avtal">
+        <PropertyRef Name="01Artikelnr RS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Varugrupp__20Huv__145C0A3F">
+    <End Role="Huvudgrupp" Type="Self.Huvudgrupp" Multiplicity="0..1" />
+    <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Huvudgrupp">
+        <PropertyRef Name="20Huvudgrupp" />
+      </Principal>
+      <Dependent Role="Varugrupp">
+        <PropertyRef Name="20Huvudgrupp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Artikel_Avtal">
+    <End Role="Avtal" Type="Self.Avtal" Multiplicity="0..1" />
+    <End Role="Artikel" Type="Self.Artikel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Avtal">
+        <PropertyRef Name="29Avtalsnr" />
+      </Principal>
+      <Dependent Role="Artikel">
+        <PropertyRef Name="29Avtalsnr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Avtal_handläggare">
+    <End Role="Handläggare" Type="Self.Handläggare" Multiplicity="0..1" />
+    <End Role="Avtal" Type="Self.Avtal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Handläggare">
+        <PropertyRef Name="HandläggarId" />
+      </Principal>
+      <Dependent Role="Avtal">
+        <PropertyRef Name="HandläggarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RegionServiceModelStoreContainer">
+    <EntitySet Name="Artikel" EntityType="Self.Artikel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Artikelgrupp" EntityType="Self.Artikelgrupp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Avtal" EntityType="Self.Avtal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Handläggare" EntityType="Self.Handläggare" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Huvudgrupp" EntityType="Self.Huvudgrupp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Leverantör" EntityType="Self.Leverantör" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Varugrupp" EntityType="Self.Varugrupp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Artikel__10LevNr__1BFD2C07" Association="Self.FK__Artikel__10LevNr__1BFD2C07">
+      <End Role="Leverantör" EntitySet="Leverantör" />
+      <End Role="Artikel" EntitySet="Artikel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Artikel__22Artik__1CF15040" Association="Self.FK__Artikel__22Artik__1CF15040">
+      <End Role="Artikelgrupp" EntitySet="Artikelgrupp" />
+      <End Role="Artikel" EntitySet="Artikel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Artikelgr__21Var__173876EA" Association="Self.FK__Artikelgr__21Var__173876EA">
+      <End Role="Varugrupp" EntitySet="Varugrupp" />
+      <End Role="Artikelgrupp" EntitySet="Artikelgrupp" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Avtal__01Artikel__1FCDBCEB" Association="Self.FK__Avtal__01Artikel__1FCDBCEB">
+      <End Role="Artikel" EntitySet="Artikel" />
+      <End Role="Avtal" EntitySet="Avtal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Varugrupp__20Huv__145C0A3F" Association="Self.FK__Varugrupp__20Huv__145C0A3F">
+      <End Role="Huvudgrupp" EntitySet="Huvudgrupp" />
+      <End Role="Varugrupp" EntitySet="Varugrupp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Artikel_Avtal" Association="Self.fk_Artikel_Avtal">
+      <End Role="Avtal" EntitySet="Avtal" />
+      <End Role="Artikel" EntitySet="Artikel" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Avtal_handläggare" Association="Self.fk_Avtal_handläggare">
+      <End Role="Handläggare" EntitySet="Handläggare" />
+      <End Role="Avtal" EntitySet="Avtal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

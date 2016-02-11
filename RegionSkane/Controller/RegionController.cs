@@ -5,16 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using RegionSkane.Utils;
 using System.Data;
+using RegionSkane.DataAccessLayer;
+using RegionSkane.Entity_Framework;
 
 namespace RegionSkane.Controller
 {
     class RegionController
     {
         RegionUtils dal = new RegionUtils();
+        DataAccess db = new DataAccess();
 
-        public string HelloWorld()
+        public void AddHandläggare(DataTable dt)
         {
-            return dal.HelloWorld();
+            db.InsertIntoMembers(dt);
+        }
+
+        public List<string> AmountOfSuppliers(DataSet ds)
+        {
+            return dal.UniqueSupplierInDataSet(ds);
         }
 
         public void printSamplePdf(string companyName, string text)

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RegionModelStoreContainer" CdmEntityContainer="RegionEntities">
+    <EntitySetMapping Name="Artikel">
+      <EntityTypeMapping TypeName="RegionModel.Artikel">
+        <MappingFragment StoreEntitySet="Artikel">
+          <ScalarProperty Name="C01Artikelnr_RS" ColumnName="01Artikelnr RS" />
+          <ScalarProperty Name="C06Benämning_1" ColumnName="06Benämning 1" />
+          <ScalarProperty Name="C07Benämning_2" ColumnName="07Benämning 2" />
+          <ScalarProperty Name="C08ProdNamn" ColumnName="08ProdNamn" />
+          <ScalarProperty Name="C09LevArtNr" ColumnName="09LevArtNr" />
+          <ScalarProperty Name="C10LevNr" ColumnName="10LevNr" />
+          <ScalarProperty Name="C12MBE_Lev" ColumnName="12MBE Lev" />
+          <ScalarProperty Name="C13MBE_Kund" ColumnName="13MBE Kund" />
+          <ScalarProperty Name="C14TrspFp" ColumnName="14TrspFp" />
+          <ScalarProperty Name="C15PallFp" ColumnName="15PallFp" />
+          <ScalarProperty Name="C16Enhet" ColumnName="16Enhet" />
+          <ScalarProperty Name="C17PrisPerEnhet" ColumnName="17PrisPerEnhet" />
+          <ScalarProperty Name="C18Momssats" ColumnName="18Momssats" />
+          <ScalarProperty Name="C19Regions_kod" ColumnName="19Regions kod" />
+          <ScalarProperty Name="C22Artikelgrupp" ColumnName="22Artikelgrupp" />
+          <ScalarProperty Name="C23Lagertyp" ColumnName="23Lagertyp" />
+          <ScalarProperty Name="C24Ledtid_Lev" ColumnName="24Ledtid Lev" />
+          <ScalarProperty Name="C25BerFörbr" ColumnName="25BerFörbr" />
+          <ScalarProperty Name="C26ÄndrBeskr" ColumnName="26ÄndrBeskr" />
+          <ScalarProperty Name="C27Reg__art_konto" ColumnName="27Reg. art.konto" />
+          <ScalarProperty Name="C28Ändringshändelse" ColumnName="28Ändringshändelse" />
+          <ScalarProperty Name="C29Avtalsnr" ColumnName="29Avtalsnr" />
+          <ScalarProperty Name="C30Lagerställe_Krav" ColumnName="30Lagerställe/Krav" />
+          <ScalarProperty Name="C31Mrp_kod" ColumnName="31Mrp-kod" />
+          <ScalarProperty Name="Pos__Nr" ColumnName="Pos. Nr" />
+          <ScalarProperty Name="Tillv__Land" ColumnName="Tillv. Land" />
+          <ScalarProperty Name="Valuta" ColumnName="Valuta" />
+          <ScalarProperty Name="Avd__Fp" ColumnName="Avd, Fp" />
+          <ScalarProperty Name="Anmärkningar" ColumnName="Anmärkningar" />
+          <ScalarProperty Name="Produktleverantör" ColumnName="Produktleverantör" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artikelgrupp">
+      <EntityTypeMapping TypeName="RegionModel.Artikelgrupp">
+        <MappingFragment StoreEntitySet="Artikelgrupp">
+          <ScalarProperty Name="C22Artikelgrupp" ColumnName="22Artikelgrupp" />
+          <ScalarProperty Name="ArtikelgruppsNamn" ColumnName="ArtikelgruppsNamn" />
+          <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Avtal">
+      <EntityTypeMapping TypeName="RegionModel.Avtal">
+        <MappingFragment StoreEntitySet="Avtal">
+          <ScalarProperty Name="C29Avtalsnr" ColumnName="29Avtalsnr" />
+          <ScalarProperty Name="C01Artikelnr_RS" ColumnName="01Artikelnr RS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Handläggare">
+      <EntityTypeMapping TypeName="RegionModel.Handläggare">
+        <MappingFragment StoreEntitySet="Handläggare">
+          <ScalarProperty Name="HandläggarId" ColumnName="HandläggarId" />
+          <ScalarProperty Name="HandläggarNamn" ColumnName="HandläggarNamn" />
+          <ScalarProperty Name="HandläggarTelefonNr" ColumnName="HandläggarTelefonNr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Huvudgrupp">
+      <EntityTypeMapping TypeName="RegionModel.Huvudgrupp">
+        <MappingFragment StoreEntitySet="Huvudgrupp">
+          <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+          <ScalarProperty Name="HuvudgruppsNamn" ColumnName="HuvudgruppsNamn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leverantör">
+      <EntityTypeMapping TypeName="RegionModel.Leverantör">
+        <MappingFragment StoreEntitySet="Leverantör">
+          <ScalarProperty Name="Levnr" ColumnName="Levnr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Varugrupp">
+      <EntityTypeMapping TypeName="RegionModel.Varugrupp">
+        <MappingFragment StoreEntitySet="Varugrupp">
+          <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+          <ScalarProperty Name="VarugruppsNamn" ColumnName="VarugruppsNamn" />
+          <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

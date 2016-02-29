@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReSkModelStoreContainer" CdmEntityContainer="ReSkEntities">
+    <EntitySetMapping Name="Artikelgrupp">
+      <EntityTypeMapping TypeName="ReSkModel.Artikelgrupp">
+        <MappingFragment StoreEntitySet="Artikelgrupp">
+          <ScalarProperty Name="C22Artikelgrupp" ColumnName="22Artikelgrupp" />
+          <ScalarProperty Name="namn" ColumnName="namn" />
+          <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+          <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Avtal">
+      <EntityTypeMapping TypeName="ReSkModel.Avtal">
+        <MappingFragment StoreEntitySet="Avtal">
+          <ScalarProperty Name="C29Avtalsnr" ColumnName="29Avtalsnr" />
+          <ScalarProperty Name="HandläggarId" ColumnName="HandläggarId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Handläggare">
+      <EntityTypeMapping TypeName="ReSkModel.Handläggare">
+        <MappingFragment StoreEntitySet="Handläggare">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Namn" ColumnName="Namn" />
+          <ScalarProperty Name="TelefonNr" ColumnName="TelefonNr" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Huvudgrupp">
+      <EntityTypeMapping TypeName="ReSkModel.Huvudgrupp">
+        <MappingFragment StoreEntitySet="Huvudgrupp">
+          <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+          <ScalarProperty Name="namn" ColumnName="namn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leverantör">
+      <EntityTypeMapping TypeName="ReSkModel.Leverantör">
+        <MappingFragment StoreEntitySet="Leverantör">
+          <ScalarProperty Name="Leverantörnr" ColumnName="Leverantörnr" />
+          <ScalarProperty Name="Namn" ColumnName="Namn" />
+          <ScalarProperty Name="Org__Nr_" ColumnName="Org# Nr#" />
+          <ScalarProperty Name="Leverantörsnamn" ColumnName="Leverantörsnamn" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Postkod___Ort" ColumnName="Postkod &amp; Ort" />
+          <ScalarProperty Name="Telefon_nr" ColumnName="Telefon nr" />
+          <ScalarProperty Name="Faxnr" ColumnName="Faxnr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Varugrupp">
+      <EntityTypeMapping TypeName="ReSkModel.Varugrupp">
+        <MappingFragment StoreEntitySet="Varugrupp">
+          <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+          <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+          <ScalarProperty Name="namn" ColumnName="namn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

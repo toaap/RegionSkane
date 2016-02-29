@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artikelgrupp">
+          <Key>
+            <PropertyRef Name="22Artikelgrupp" />
+            <PropertyRef Name="21Varugrupp" />
+            <PropertyRef Name="20Huvudgrupp" />
+          </Key>
+          <Property Name="22Artikelgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="namn" Type="varchar" MaxLength="255" />
+          <Property Name="21Varugrupp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="20Huvudgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Avtal">
+          <Key>
+            <PropertyRef Name="29Avtalsnr" />
+          </Key>
+          <Property Name="29Avtalsnr" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HandläggarId" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Handläggare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Namn" Type="varchar" MaxLength="255" />
+          <Property Name="TelefonNr" Type="varchar" MaxLength="255" />
+          <Property Name="Mail" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Huvudgrupp">
+          <Key>
+            <PropertyRef Name="20Huvudgrupp" />
+          </Key>
+          <Property Name="20Huvudgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="namn" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Leverantör">
+          <Key>
+            <PropertyRef Name="Leverantörnr" />
+          </Key>
+          <Property Name="Leverantörnr" Type="float" Nullable="false" />
+          <Property Name="Namn" Type="nvarchar" MaxLength="255" />
+          <Property Name="Org# Nr#" Type="float" />
+          <Property Name="Leverantörsnamn" Type="nvarchar" MaxLength="255" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="255" />
+          <Property Name="Postkod &amp; Ort" Type="nvarchar" MaxLength="255" />
+          <Property Name="Telefon nr" Type="nvarchar" MaxLength="255" />
+          <Property Name="Faxnr" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Varugrupp">
+          <Key>
+            <PropertyRef Name="20Huvudgrupp" />
+            <PropertyRef Name="21Varugrupp" />
+          </Key>
+          <Property Name="20Huvudgrupp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="21Varugrupp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="namn" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Artikelgrupp__35BCFE0A">
+          <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="1" />
+          <End Role="Artikelgrupp" Type="Self.Artikelgrupp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Varugrupp">
+              <PropertyRef Name="21Varugrupp" />
+              <PropertyRef Name="20Huvudgrupp" />
+            </Principal>
+            <Dependent Role="Artikelgrupp">
+              <PropertyRef Name="21Varugrupp" />
+              <PropertyRef Name="20Huvudgrupp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Avtal__Handlägga__1A14E395">
+          <End Role="Handläggare" Type="Self.Handläggare" Multiplicity="0..1" />
+          <End Role="Avtal" Type="Self.Avtal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handläggare">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Avtal">
+              <PropertyRef Name="HandläggarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Varugrupp__20Huv__276EDEB3">
+          <End Role="Huvudgrupp" Type="Self.Huvudgrupp" Multiplicity="1" />
+          <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huvudgrupp">
+              <PropertyRef Name="20Huvudgrupp" />
+            </Principal>
+            <Dependent Role="Varugrupp">
+              <PropertyRef Name="20Huvudgrupp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RSModelStoreContainer">
+          <EntitySet Name="Artikelgrupp" EntityType="Self.Artikelgrupp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Avtal" EntityType="Self.Avtal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Handläggare" EntityType="Self.Handläggare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Huvudgrupp" EntityType="Self.Huvudgrupp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leverantör" EntityType="Self.Leverantör" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Varugrupp" EntityType="Self.Varugrupp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Artikelgrupp__35BCFE0A" Association="Self.FK__Artikelgrupp__35BCFE0A">
+            <End Role="Varugrupp" EntitySet="Varugrupp" />
+            <End Role="Artikelgrupp" EntitySet="Artikelgrupp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Avtal__Handlägga__1A14E395" Association="Self.FK__Avtal__Handlägga__1A14E395">
+            <End Role="Handläggare" EntitySet="Handläggare" />
+            <End Role="Avtal" EntitySet="Avtal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Varugrupp__20Huv__276EDEB3" Association="Self.FK__Varugrupp__20Huv__276EDEB3">
+            <End Role="Huvudgrupp" EntitySet="Huvudgrupp" />
+            <End Role="Varugrupp" EntitySet="Varugrupp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artikelgrupp">
+          <Key>
+            <PropertyRef Name="C22Artikelgrupp" />
+            <PropertyRef Name="C21Varugrupp" />
+            <PropertyRef Name="C20Huvudgrupp" />
+          </Key>
+          <Property Name="C22Artikelgrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="C21Varugrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="C20Huvudgrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Varugrupp" Relationship="Self.FK__Artikelgrupp__35BCFE0A" FromRole="Artikelgrupp" ToRole="Varugrupp" />
+        </EntityType>
+        <EntityType Name="Avtal">
+          <Key>
+            <PropertyRef Name="C29Avtalsnr" />
+          </Key>
+          <Property Name="C29Avtalsnr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HandläggarId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Handläggare" Relationship="Self.FK__Avtal__Handlägga__1A14E395" FromRole="Avtal" ToRole="Handläggare" />
+        </EntityType>
+        <EntityType Name="Handläggare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonNr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Avtal" Relationship="Self.FK__Avtal__Handlägga__1A14E395" FromRole="Handläggare" ToRole="Avtal" />
+        </EntityType>
+        <EntityType Name="Huvudgrupp">
+          <Key>
+            <PropertyRef Name="C20Huvudgrupp" />
+          </Key>
+          <Property Name="C20Huvudgrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Varugrupp" Relationship="Self.FK__Varugrupp__20Huv__276EDEB3" FromRole="Huvudgrupp" ToRole="Varugrupp" />
+        </EntityType>
+        <EntityType Name="Leverantör">
+          <Key>
+            <PropertyRef Name="Leverantörnr" />
+          </Key>
+          <Property Name="Leverantörnr" Type="Double" Nullable="false" />
+          <Property Name="Namn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Org__Nr_" Type="Double" />
+          <Property Name="Leverantörsnamn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Postkod___Ort" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon_nr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Faxnr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Varugrupp">
+          <Key>
+            <PropertyRef Name="C20Huvudgrupp" />
+            <PropertyRef Name="C21Varugrupp" />
+          </Key>
+          <Property Name="C20Huvudgrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="C21Varugrupp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Artikelgrupp" Relationship="Self.FK__Artikelgrupp__35BCFE0A" FromRole="Varugrupp" ToRole="Artikelgrupp" />
+          <NavigationProperty Name="Huvudgrupp" Relationship="Self.FK__Varugrupp__20Huv__276EDEB3" FromRole="Varugrupp" ToRole="Huvudgrupp" />
+        </EntityType>
+        <Association Name="FK__Artikelgrupp__35BCFE0A">
+          <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="1" />
+          <End Role="Artikelgrupp" Type="Self.Artikelgrupp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Varugrupp">
+              <PropertyRef Name="C21Varugrupp" />
+              <PropertyRef Name="C20Huvudgrupp" />
+            </Principal>
+            <Dependent Role="Artikelgrupp">
+              <PropertyRef Name="C21Varugrupp" />
+              <PropertyRef Name="C20Huvudgrupp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Avtal__Handlägga__1A14E395">
+          <End Role="Handläggare" Type="Self.Handläggare" Multiplicity="0..1" />
+          <End Role="Avtal" Type="Self.Avtal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handläggare">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Avtal">
+              <PropertyRef Name="HandläggarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Varugrupp__20Huv__276EDEB3">
+          <End Role="Huvudgrupp" Type="Self.Huvudgrupp" Multiplicity="1" />
+          <End Role="Varugrupp" Type="Self.Varugrupp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Huvudgrupp">
+              <PropertyRef Name="C20Huvudgrupp" />
+            </Principal>
+            <Dependent Role="Varugrupp">
+              <PropertyRef Name="C20Huvudgrupp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RSEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artikelgrupp" EntityType="Self.Artikelgrupp" />
+          <EntitySet Name="Avtal" EntityType="Self.Avtal" />
+          <EntitySet Name="Handläggare" EntityType="Self.Handläggare" />
+          <EntitySet Name="Huvudgrupp" EntityType="Self.Huvudgrupp" />
+          <EntitySet Name="Leverantör" EntityType="Self.Leverantör" />
+          <EntitySet Name="Varugrupp" EntityType="Self.Varugrupp" />
+          <AssociationSet Name="FK__Artikelgrupp__35BCFE0A" Association="Self.FK__Artikelgrupp__35BCFE0A">
+            <End Role="Varugrupp" EntitySet="Varugrupp" />
+            <End Role="Artikelgrupp" EntitySet="Artikelgrupp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Avtal__Handlägga__1A14E395" Association="Self.FK__Avtal__Handlägga__1A14E395">
+            <End Role="Handläggare" EntitySet="Handläggare" />
+            <End Role="Avtal" EntitySet="Avtal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Varugrupp__20Huv__276EDEB3" Association="Self.FK__Varugrupp__20Huv__276EDEB3">
+            <End Role="Huvudgrupp" EntitySet="Huvudgrupp" />
+            <End Role="Varugrupp" EntitySet="Varugrupp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RSModelStoreContainer" CdmEntityContainer="RSEntity">
+          <EntitySetMapping Name="Artikelgrupp">
+            <EntityTypeMapping TypeName="RSModel.Artikelgrupp">
+              <MappingFragment StoreEntitySet="Artikelgrupp">
+                <ScalarProperty Name="C22Artikelgrupp" ColumnName="22Artikelgrupp" />
+                <ScalarProperty Name="namn" ColumnName="namn" />
+                <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+                <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Avtal">
+            <EntityTypeMapping TypeName="RSModel.Avtal">
+              <MappingFragment StoreEntitySet="Avtal">
+                <ScalarProperty Name="C29Avtalsnr" ColumnName="29Avtalsnr" />
+                <ScalarProperty Name="HandläggarId" ColumnName="HandläggarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Handläggare">
+            <EntityTypeMapping TypeName="RSModel.Handläggare">
+              <MappingFragment StoreEntitySet="Handläggare">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Namn" ColumnName="Namn" />
+                <ScalarProperty Name="TelefonNr" ColumnName="TelefonNr" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Huvudgrupp">
+            <EntityTypeMapping TypeName="RSModel.Huvudgrupp">
+              <MappingFragment StoreEntitySet="Huvudgrupp">
+                <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+                <ScalarProperty Name="namn" ColumnName="namn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leverantör">
+            <EntityTypeMapping TypeName="RSModel.Leverantör">
+              <MappingFragment StoreEntitySet="Leverantör">
+                <ScalarProperty Name="Leverantörnr" ColumnName="Leverantörnr" />
+                <ScalarProperty Name="Namn" ColumnName="Namn" />
+                <ScalarProperty Name="Org__Nr_" ColumnName="Org# Nr#" />
+                <ScalarProperty Name="Leverantörsnamn" ColumnName="Leverantörsnamn" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Postkod___Ort" ColumnName="Postkod &amp; Ort" />
+                <ScalarProperty Name="Telefon_nr" ColumnName="Telefon nr" />
+                <ScalarProperty Name="Faxnr" ColumnName="Faxnr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Varugrupp">
+            <EntityTypeMapping TypeName="RSModel.Varugrupp">
+              <MappingFragment StoreEntitySet="Varugrupp">
+                <ScalarProperty Name="C20Huvudgrupp" ColumnName="20Huvudgrupp" />
+                <ScalarProperty Name="C21Varugrupp" ColumnName="21Varugrupp" />
+                <ScalarProperty Name="namn" ColumnName="namn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

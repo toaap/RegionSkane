@@ -27,4 +27,5 @@ C:\Users\toaap\Documents\Visual Studio 2013\Projects\RegionSkane\RegionSkane\bin
 C:\Users\toaap\Documents\Visual Studio 2013\Projects\RegionSkane\RegionSkane\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\toaap\Documents\Visual Studio 2013\Projects\RegionSkane\RegionSkane\bin\Debug\EntityFramework.xml
 C:\Users\toaap\Documents\Visual Studio 2013\Projects\RegionSkane\RegionSkane\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\toaap\Documents\Visual Studio 2013\Projects\RegionSkane\RegionSkane\obj\Debug\RegionSkane.AddHandledareView.resources
+C:\Users\toaap\documents\visual studio 2013\Projects\RegionSkane\RegionSkane\obj\Debug\RegionSkane.CreateContractView.resources
+C:\Users\toaap\documents\visual studio 2013\Projects\RegionSkane\RegionSkane\obj\Debug\RegionSkane.View.CreateHandView.resources

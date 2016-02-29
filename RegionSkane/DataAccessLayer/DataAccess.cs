@@ -6,31 +6,172 @@ using System.Threading.Tasks;
 using RegionSkane.Entity_Framework;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.Entity;
+using RegionSkane.Utils;
 
 namespace RegionSkane.DataAccessLayer
 {
     class DataAccess
     {
-        private RegionServiceEntity con = new RegionServiceEntity();
+        
+        static private ReSkEntities con = new ReSkEntities();
+       
+        
+        //ADMINISTRATOR FUNCTIONS ************
 
-        public void AddHandläggare(Handläggare h)
+        public Handläggare GetAdministrator(string id)
         {
             try
             {
-                List<Handläggare> handläggarList = con.Handläggare.Where(r => r.HandläggarId == h.HandläggarId).ToList();
+                Handläggare h = con.Handläggare.SingleOrDefault(r => r.Id == id);
+                return h;
+            }
+            catch
+            {
+                throw new RegionException(1);
+            }
+        }
+
+        public List<Handläggare> GetAllAdministrators()
+        {
+            try
+            {
+                List<Handläggare> list = con.Handläggare.ToList();
+                if (list.Count > 0)
+                {
+                    return list;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                throw new RegionException(1);
+            }
+        }
+
+        public bool AddAdministrator(Handläggare h)
+        {
+            try
+            {
+                List<Handläggare> handläggarList = con.Handläggare.Where(r => r.Id == h.Id).ToList();
 
                 if (handläggarList.Count() == 0)
                 {
                     con.Handläggare.Add(h);
                     con.SaveChanges();
+                    return true;
                 }
+                return false;
 
-            }catch(InvalidOperationException)
+            }
+            catch
             {
                 con.Handläggare.Remove(h);
-                //throw new DatabaseException("Databasfel, kontakta systemadminstratör!");
+                throw new RegionException(1);
             }
         }
+
+        public bool UpdateAdministrator(Handläggare h)
+        {
+            try
+            {
+
+                Handläggare oldAdmin = GetAdministrator(h.Id);
+
+                con.Entry(oldAdmin).CurrentValues.SetValues(h);
+                con.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                throw new RegionException(1);
+            }
+        }
+
+        public bool DeleteAdministrator(string id)
+        {
+            try
+            {
+                List<Handläggare> list = con.Handläggare.Where(r => r.Id == id).ToList();
+
+                if (list.Count() != 0)
+                {
+                    Handläggare h = con.Handläggare.First(r => r.Id == id);
+                    con.Handläggare.Remove(h);
+                    con.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                throw new RegionException(1);
+            }
+        }
+
+        //SUPPLIER FUNCTIONS *********
+
+        public Leverantör GetSupplier(string levnr)
+        {
+            try
+            {
+                double levnrFloat = double.Parse(levnr);
+                Leverantör l = con.Leverantör.Find(levnrFloat);
+                return l;
+            }
+            catch
+            {
+                throw new RegionException(1);
+            }
+        }
+
+        // Returns list with name for 'Artikelgrupp', 'Varugrupp' and 'Huvudgrupp' in described order.
+        public List<string> GetArtNames(string dbArtNbr, string varuNbr, string huvudNbr)
+        {
+            try
+            {
+                List<string> mainList = new List<string>();
+                string artName;
+                string varuName;
+                string huvudName;
+
+                
+                List<Artikelgrupp> aList = con.Artikelgrupp.Where(r => r.C22Artikelgrupp == dbArtNbr && r.C21Varugrupp == varuNbr && r.C20Huvudgrupp == huvudNbr).ToList();
+                if (aList.Count() > 0)
+                {
+                    
+                    foreach(Artikelgrupp a in aList)
+                    {
+                        artName = a.namn;
+                        varuName = a.Varugrupp.namn;
+                        huvudName = a.Varugrupp.Huvudgrupp.namn;
+
+                        mainList.Add(artName);
+                        mainList.Add(varuName);
+                        mainList.Add(huvudName);
+                    }
+                    
+                 
+                }
+
+                return mainList;
+
+            }
+            catch
+            {
+                throw new RegionException(2);
+            }
+        }
+
+
+        
+
+        /*
 
         public void InsertIntoMembers(DataTable dataTable)
         {
@@ -56,50 +197,8 @@ namespace RegionSkane.DataAccessLayer
 
             }
         }
+         * */
 
-
-
-
-
-
-        public DataTable GetLevArticles(string levNr, DataSet dataSet)
-        {
-
-            DataTable dt = dataSet.Tables["table1"];
-            DataTable returnDt = new DataTable();
-
-            foreach (DataColumn column in dt.Columns)
-            {
-                returnDt.Columns.Add(column.ColumnName);
-            }
-            //Adds löpnr column
-            returnDt.Columns.Add("Löpnr");
-
-            if (dt != null)
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    if (row["10LevNr"].ToString().Equals(levNr))
-                    {
-                        DataRow artRow = returnDt.NewRow();
-
-                        foreach (DataColumn column in returnDt.Columns)
-                        {
-                            if (column.ColumnName.Equals("Löpnr"))
-                            {
-                                artRow["Löpnr"] = "";
-                            }
-                            else
-                            {
-                                artRow[column.ColumnName] = row[column.ColumnName];
-                            }
-                        }
-                        returnDt.Rows.Add(artRow);
-                    }
-                }
-            }
-            return returnDt;
-        }
 
 
 
